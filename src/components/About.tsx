@@ -24,7 +24,7 @@ const offerings = [
   {
     icon: <LogIcon size={32} weight="light" />,
     title: "Wooden Slabs",
-    description: "Quality wood planks on request",
+    description: "Indigenous wood planks on request",
   },
 ];
 
@@ -55,8 +55,8 @@ export default function About() {
           </p>
           <p className="font-body text-lg md:text-xl text-charcoal/80 leading-relaxed">
             Every piece that leaves our workshop carries the warmth of
-            handcrafted artistry and the beauty of quality woods from South
-            Africa and beyond. Visit us to find something truly special.
+            handcrafted artistry and the soul of indigenous South African woods.
+            Visit us to find something truly special.
           </p>
         </div>
 

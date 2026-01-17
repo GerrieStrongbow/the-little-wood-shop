@@ -10,12 +10,12 @@ export default function Hero() {
           alt="The Little Wood Shop workshop"
           fill
           priority
-          className="object-cover"
+          className="object-cover blur-[2px]"
         />
-        {/* Gradient Overlay - stronger for text legibility */}
-        <div className="absolute inset-0 bg-linear-to-b from-charcoal/70 via-charcoal/60 to-charcoal/80" />
+        {/* Gradient Overlay - lighter since blur helps legibility */}
+        <div className="absolute inset-0 bg-linear-to-b from-charcoal/50 via-charcoal/40 to-charcoal/60" />
         {/* Subtle warm tint */}
-        <div className="absolute inset-0 bg-wood-dark/30 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-wood-dark/20 mix-blend-multiply" />
         {/* Vignette effect for focus */}
         <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-transparent to-charcoal/40" />
       </div>
