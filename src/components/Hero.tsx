@@ -12,10 +12,12 @@ export default function Hero() {
           priority
           className="object-cover"
         />
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70" />
+        {/* Gradient Overlay - stronger for text legibility */}
+        <div className="absolute inset-0 bg-linear-to-b from-charcoal/70 via-charcoal/60 to-charcoal/80" />
         {/* Subtle warm tint */}
-        <div className="absolute inset-0 bg-wood-dark/20 mix-blend-multiply" />
+        <div className="absolute inset-0 bg-wood-dark/30 mix-blend-multiply" />
+        {/* Vignette effect for focus */}
+        <div className="absolute inset-0 bg-radial-[ellipse_at_center] from-transparent via-transparent to-charcoal/40" />
       </div>
 
       {/* Content */}
@@ -24,23 +26,23 @@ export default function Hero() {
         <div className="w-16 h-px bg-amber mx-auto mb-8 animate-fade-in" />
 
         {/* Main Title */}
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream font-semibold tracking-wide mb-6 animate-fade-in-up">
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-cream font-semibold tracking-wide mb-6 animate-fade-in-up md:whitespace-nowrap drop-shadow-lg">
           The Little Wood Shop
         </h1>
 
         {/* Tagline */}
-        <p className="font-body text-lg md:text-xl text-cream/90 tracking-[0.2em] uppercase mb-4 animate-fade-in-up delay-200">
+        <p className="font-body text-xl md:text-2xl text-cream/90 tracking-[0.2em] uppercase mb-4 animate-fade-in-up delay-200 drop-shadow-md">
           Authentic Wood Creations{" "}
           <span className="text-amber mx-2">·</span> Local Craft
         </p>
 
         {/* Offerings */}
-        <p className="font-display text-base md:text-lg text-amber-light/90 italic mb-8 animate-fade-in-up delay-200">
+        <p className="font-display text-xl md:text-2xl text-amber-light italic mb-8 animate-fade-in-up delay-200 drop-shadow-md">
           Furniture, Gifts, Toys and Wooden Slabs
         </p>
 
         {/* Subtitle */}
-        <p className="font-display text-xl md:text-2xl text-cream/80 italic max-w-2xl mx-auto mb-12 animate-fade-in-up delay-300">
+        <p className="font-display text-2xl md:text-3xl text-cream/90 italic max-w-2xl mx-auto mb-12 animate-fade-in-up delay-300 drop-shadow-md">
           One of the oldest gems in Sedgefield, Western Cape
         </p>
 
