@@ -152,7 +152,7 @@ export default function Contact() {
           <div className="relative">
             <div className="aspect-square lg:aspect-auto lg:h-full min-h-[400px] rounded-lg overflow-hidden shadow-xl">
               <iframe
-                src="https://maps.google.com/maps?q=The+Little+Wood+Shop,+Sedgefield,+South+Africa&t=&z=17&ie=UTF8&iwloc=B&output=embed"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.108654756852!2d22.803432177364247!3d-34.015421826671094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e78a32df6b01203%3A0x9a8d1aff2ae2e65e!2sThe%20Little%20Wood%20Shop!5e0!3m2!1sen!2sza!4v1768653160499!5m2!1sen!2sza"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
