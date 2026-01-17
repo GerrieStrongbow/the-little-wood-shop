@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
 
 const galleryImages = [
   {
@@ -64,6 +67,64 @@ const galleryImages = [
 ];
 
 export default function Gallery() {
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+  const openLightbox = (index: number) => setSelectedIndex(index);
+  const closeLightbox = () => setSelectedIndex(null);
+
+  const goToPrevious = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex(
+        selectedIndex === 0 ? galleryImages.length - 1 : selectedIndex - 1
+      );
+    }
+  }, [selectedIndex]);
+
+  const goToNext = useCallback(() => {
+    if (selectedIndex !== null) {
+      setSelectedIndex(
+        selectedIndex === galleryImages.length - 1 ? 0 : selectedIndex + 1
+      );
+    }
+  }, [selectedIndex]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedIndex === null) return;
+
+      switch (e.key) {
+        case "Escape":
+          closeLightbox();
+          break;
+        case "ArrowLeft":
+          goToPrevious();
+          break;
+        case "ArrowRight":
+          goToNext();
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedIndex, goToPrevious, goToNext]);
+
+  // Prevent body scroll when lightbox is open
+  useEffect(() => {
+    if (selectedIndex !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedIndex]);
+
+  const selectedImage =
+    selectedIndex !== null ? galleryImages[selectedIndex] : null;
+
   return (
     <section id="gallery" className="py-24 md:py-32 bg-charcoal texture-grain">
       <div className="max-w-7xl mx-auto px-6">
@@ -85,32 +146,24 @@ export default function Gallery() {
         {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {galleryImages.map((image, index) => (
-            <div
+            <button
               key={image.src}
-              className="group relative aspect-square overflow-hidden rounded-lg bg-wood-dark cursor-pointer"
+              onClick={() => openLightbox(index)}
+              className="group relative aspect-square overflow-hidden rounded-lg bg-wood-dark cursor-pointer focus:outline-none focus:ring-2 focus:ring-amber focus:ring-offset-2 focus:ring-offset-charcoal"
               style={{ animationDelay: `${index * 50}ms` }}
+              aria-label={`View ${image.alt}`}
             >
               <Image
                 src={image.src}
                 alt={image.alt}
                 fill
-                className="object-cover transition-all duration-500 group-hover:scale-105"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               />
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-charcoal/80 via-charcoal/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
-
-              {/* Category Badge */}
-              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <span className="inline-block font-body text-xs tracking-wider uppercase text-amber bg-charcoal/80 px-3 py-1 rounded-full">
-                  {image.category}
-                </span>
-              </div>
-
               {/* Subtle border glow on hover */}
               <div className="absolute inset-0 rounded-lg ring-2 ring-amber/0 group-hover:ring-amber/30 transition-all duration-300" />
-            </div>
+            </button>
           ))}
         </div>
 
@@ -140,6 +193,112 @@ export default function Gallery() {
           </a>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/95 backdrop-blur-sm"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Image preview"
+        >
+          {/* Close button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
+            aria-label="Close preview"
+          >
+            <svg
+              className="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Previous button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevious();
+            }}
+            className="absolute left-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
+            aria-label="Previous image"
+          >
+            <svg
+              className="w-10 h-10"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          {/* Next button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="absolute right-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
+            aria-label="Next image"
+          >
+            <svg
+              className="w-10 h-10"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+
+          {/* Image container */}
+          <div
+            className="relative max-w-[90vw] max-h-[85vh] aspect-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              width={1200}
+              height={1200}
+              className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+              priority
+            />
+
+            {/* Caption */}
+            <p className="absolute -bottom-10 left-0 right-0 text-center font-body text-cream/70 text-sm">
+              {selectedImage.alt}
+            </p>
+          </div>
+
+          {/* Image counter */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-body text-cream/50 text-sm">
+            {selectedIndex !== null ? selectedIndex + 1 : 0} /{" "}
+            {galleryImages.length}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
