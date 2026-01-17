@@ -13,7 +13,7 @@ export default function Hero() {
           className="object-cover"
         />
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70" />
+        <div className="absolute inset-0 bg-linear-to-b from-charcoal/60 via-charcoal/40 to-charcoal/70" />
         {/* Subtle warm tint */}
         <div className="absolute inset-0 bg-wood-dark/20 mix-blend-multiply" />
       </div>

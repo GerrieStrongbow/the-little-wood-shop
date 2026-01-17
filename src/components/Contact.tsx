@@ -123,7 +123,7 @@ export default function Contact() {
                 }
                 className="group flex items-start gap-5 p-4 -mx-4 rounded-lg transition-all duration-300 hover:bg-cream-dark"
               >
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-wood-light/20 flex items-center justify-center text-wood-dark transition-all duration-300 group-hover:bg-amber/20 group-hover:text-amber-dark">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-wood-light/20 flex items-center justify-center text-wood-dark transition-all duration-300 group-hover:bg-amber/20 group-hover:text-amber-dark">
                   {item.icon}
                 </div>
                 <div>
@@ -160,7 +160,7 @@ export default function Contact() {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title="The Little Wood Shop location"
-                className="grayscale-[30%] contrast-[1.1]"
+                className="grayscale-30 contrast-110"
               />
             </div>
 
