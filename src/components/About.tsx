@@ -1,6 +1,7 @@
 const offerings = [
   {
     icon: (
+      // Table icon
       <svg
         className="w-8 h-8"
         fill="none"
@@ -11,7 +12,7 @@ const offerings = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1}
-          d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+          d="M3 8h18M3 8v2h18V8M3 8l1-3h16l1 3M6 10v9M18 10v9M9 10v6M15 10v6"
         />
       </svg>
     ),
@@ -20,6 +21,7 @@ const offerings = [
   },
   {
     icon: (
+      // Gift box icon
       <svg
         className="w-8 h-8"
         fill="none"
@@ -39,6 +41,7 @@ const offerings = [
   },
   {
     icon: (
+      // Toy car icon
       <svg
         className="w-8 h-8"
         fill="none"
@@ -49,7 +52,7 @@ const offerings = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={1}
-          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          d="M5 17a2 2 0 104 0m-4 0a2 2 0 014 0m-4 0H4v-4l2-4h8l3 4h3v4h-1m-4 0a2 2 0 104 0m-4 0a2 2 0 014 0M9 17h6"
         />
       </svg>
     ),
@@ -58,22 +61,38 @@ const offerings = [
   },
   {
     icon: (
+      // Wood log/slab cross-section icon
       <svg
         className="w-8 h-8"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="8"
+          ry="6"
           strokeWidth={1}
-          d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+        />
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="5"
+          ry="3.5"
+          strokeWidth={1}
+        />
+        <ellipse
+          cx="12"
+          cy="12"
+          rx="2"
+          ry="1.5"
+          strokeWidth={1}
         />
       </svg>
     ),
     title: "Wooden Slabs",
-    description: "Indigenous wood planks on request",
+    description: "Quality wood planks on request",
   },
 ];
 
@@ -104,8 +123,8 @@ export default function About() {
           </p>
           <p className="font-body text-lg md:text-xl text-charcoal/80 leading-relaxed">
             Every piece that leaves our workshop carries the warmth of
-            handcrafted artistry and the soul of indigenous South African woods.
-            Visit us to find something truly special.
+            handcrafted artistry and the beauty of quality woods from South
+            Africa and beyond. Visit us to find something truly special.
           </p>
         </div>
 

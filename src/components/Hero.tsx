@@ -29,9 +29,14 @@ export default function Hero() {
         </h1>
 
         {/* Tagline */}
-        <p className="font-body text-lg md:text-xl text-cream/90 tracking-[0.2em] uppercase mb-8 animate-fade-in-up delay-200">
+        <p className="font-body text-lg md:text-xl text-cream/90 tracking-[0.2em] uppercase mb-4 animate-fade-in-up delay-200">
           Authentic Wood Creations{" "}
           <span className="text-amber mx-2">·</span> Local Craft
+        </p>
+
+        {/* Offerings */}
+        <p className="font-display text-base md:text-lg text-amber-light/90 italic mb-8 animate-fade-in-up delay-200">
+          Furniture, Gifts, Toys and Wooden Slabs
         </p>
 
         {/* Subtitle */}
@@ -61,12 +66,26 @@ export default function Hero() {
         </a>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-cream/50 rounded-full flex justify-center pt-2">
-          <div className="w-1 h-2 bg-cream/70 rounded-full" />
-        </div>
-      </div>
+      {/* Scroll Indicator - Down Arrow */}
+      <a
+        href="#about"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-cream/60 hover:text-cream transition-colors"
+        aria-label="Scroll to content"
+      >
+        <svg
+          className="w-8 h-8 animate-bounce"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </a>
     </section>
   );
 }

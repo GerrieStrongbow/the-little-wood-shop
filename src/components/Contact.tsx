@@ -24,7 +24,7 @@ const contactInfo = [
     label: "Visit Us",
     value: "Cnr Service Road & Mossie Street",
     subvalue: "Sedgefield, Western Cape",
-    href: "https://maps.google.com/?q=Service+Road+Mossie+Street+Sedgefield",
+    href: "https://maps.google.com/?q=-34.01591,22.805494",
   },
   {
     icon: (
@@ -152,7 +152,7 @@ export default function Contact() {
           <div className="relative">
             <div className="aspect-square lg:aspect-auto lg:h-full min-h-[400px] rounded-lg overflow-hidden shadow-xl">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3310.5!2d22.7897!3d-34.0086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e6154b0a0a0a0a0%3A0x0!2sSedgefield%2C%20Western%20Cape%2C%20South%20Africa!5e0!3m2!1sen!2sza!4v1700000000000!5m2!1sen!2sza"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d826.5!2d22.805494!3d-34.01591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e615415b9d83c9b%3A0x7dd3b91b5c9f4c9a!2sThe%20Little%20Wood%20Shop!5e0!3m2!1sen!2sza!4v1705000000000!5m2!1sen!2sza"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
