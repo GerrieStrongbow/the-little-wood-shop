@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const galleryImages = [
   {
@@ -122,6 +122,37 @@ export default function Gallery() {
     };
   }, [selectedIndex]);
 
+  // Touch/swipe handling for mobile
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+
+    const touchEndX = e.changedTouches[0].clientX;
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaX = touchEndX - touchStartX.current;
+    const deltaY = touchEndY - touchStartY.current;
+
+    // Only trigger swipe if horizontal movement is greater than vertical
+    // and the swipe distance is significant (> 50px)
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        goToPrevious(); // Swipe right = previous
+      } else {
+        goToNext(); // Swipe left = next
+      }
+    }
+
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
   const selectedImage =
     selectedIndex === null ? null : galleryImages[selectedIndex];
 
@@ -208,8 +239,12 @@ export default function Gallery() {
             aria-label="Close preview"
           />
 
-          {/* Content container */}
-          <div className="relative z-10 flex items-center justify-center w-full h-full pointer-events-none">
+          {/* Content container with touch handlers for swipe */}
+          <div
+            className="relative z-10 flex items-center justify-center w-full h-full pointer-events-none"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* Close button */}
             <button
               onClick={closeLightbox}
@@ -231,14 +266,14 @@ export default function Gallery() {
               </svg>
             </button>
 
-            {/* Previous button */}
+            {/* Previous button - visible on desktop, styled for mobile */}
             <button
               onClick={goToPrevious}
-              className="absolute left-4 p-2 text-cream/70 hover:text-cream transition-colors pointer-events-auto"
+              className="absolute left-3 md:left-4 z-20 p-3 md:p-2 text-charcoal md:text-cream/70 bg-cream/90 md:bg-transparent hover:bg-cream md:hover:bg-transparent hover:text-charcoal md:hover:text-cream rounded-full md:rounded-none shadow-lg md:shadow-none transition-colors pointer-events-auto"
               aria-label="Previous image"
             >
               <svg
-                className="w-10 h-10"
+                className="w-6 h-6 md:w-10 md:h-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -246,20 +281,20 @@ export default function Gallery() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={1.5}
+                  strokeWidth={2}
                   d="M15 19l-7-7 7-7"
                 />
               </svg>
             </button>
 
-            {/* Next button */}
+            {/* Next button - visible on desktop, styled for mobile */}
             <button
               onClick={goToNext}
-              className="absolute right-4 p-2 text-cream/70 hover:text-cream transition-colors pointer-events-auto"
+              className="absolute right-3 md:right-4 z-20 p-3 md:p-2 text-charcoal md:text-cream/70 bg-cream/90 md:bg-transparent hover:bg-cream md:hover:bg-transparent hover:text-charcoal md:hover:text-cream rounded-full md:rounded-none shadow-lg md:shadow-none transition-colors pointer-events-auto"
               aria-label="Next image"
             >
               <svg
-                className="w-10 h-10"
+                className="w-6 h-6 md:w-10 md:h-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -267,7 +302,7 @@ export default function Gallery() {
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={1.5}
+                  strokeWidth={2}
                   d="M9 5l7 7-7 7"
                 />
               </svg>
@@ -290,8 +325,9 @@ export default function Gallery() {
               </figcaption>
             </figure>
 
-            {/* Image counter */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-body text-cream/50 text-sm">
+            {/* Image counter and swipe hint on mobile */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-body text-cream/50 text-sm text-center">
+              <span className="md:hidden block mb-1 text-xs">Swipe to navigate</span>
               {selectedIndex === null ? 0 : selectedIndex + 1} /{" "}
               {galleryImages.length}
             </div>
