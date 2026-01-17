@@ -1,96 +1,28 @@
+import {
+  DeskIcon,
+  GiftIcon,
+  TruckIcon,
+  LogIcon,
+} from "@phosphor-icons/react/ssr";
+
 const offerings = [
   {
-    icon: (
-      // Table icon
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          d="M3 8h18M3 8v2h18V8M3 8l1-3h16l1 3M6 10v9M18 10v9M9 10v6M15 10v6"
-        />
-      </svg>
-    ),
+    icon: <DeskIcon size={32} weight="light" />,
     title: "Furniture",
     description: "Handcrafted tables, chairs, and bespoke pieces",
   },
   {
-    icon: (
-      // Gift box icon
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-        />
-      </svg>
-    ),
+    icon: <GiftIcon size={32} weight="light" />,
     title: "Gifts",
     description: "Unique wooden treasures for every occasion",
   },
   {
-    icon: (
-      // Toy car icon
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={1}
-          d="M5 17a2 2 0 104 0m-4 0a2 2 0 014 0m-4 0H4v-4l2-4h8l3 4h3v4h-1m-4 0a2 2 0 104 0m-4 0a2 2 0 014 0M9 17h6"
-        />
-      </svg>
-    ),
+    icon: <TruckIcon size={32} weight="light" />,
     title: "Toys",
     description: "Traditional wooden toys for little ones",
   },
   {
-    icon: (
-      // Wood log/slab cross-section icon
-      <svg
-        className="w-8 h-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="8"
-          ry="6"
-          strokeWidth={1}
-        />
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="5"
-          ry="3.5"
-          strokeWidth={1}
-        />
-        <ellipse
-          cx="12"
-          cy="12"
-          rx="2"
-          ry="1.5"
-          strokeWidth={1}
-        />
-      </svg>
-    ),
+    icon: <LogIcon size={32} weight="light" />,
     title: "Wooden Slabs",
     description: "Quality wood planks on request",
   },
