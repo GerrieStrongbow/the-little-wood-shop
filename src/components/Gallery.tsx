@@ -106,16 +106,16 @@ export default function Gallery() {
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    globalThis.addEventListener("keydown", handleKeyDown);
+    return () => globalThis.removeEventListener("keydown", handleKeyDown);
   }, [selectedIndex, goToPrevious, goToNext]);
 
   // Prevent body scroll when lightbox is open
   useEffect(() => {
-    if (selectedIndex !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
+    if (selectedIndex === null) {
       document.body.style.overflow = "";
+    } else {
+      document.body.style.overflow = "hidden";
     }
     return () => {
       document.body.style.overflow = "";
@@ -123,7 +123,7 @@ export default function Gallery() {
   }, [selectedIndex]);
 
   const selectedImage =
-    selectedIndex !== null ? galleryImages[selectedIndex] : null;
+    selectedIndex === null ? null : galleryImages[selectedIndex];
 
   return (
     <section id="gallery" className="py-24 md:py-32 bg-charcoal texture-grain">
@@ -196,108 +196,107 @@ export default function Gallery() {
 
       {/* Lightbox Modal */}
       {selectedImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/95 backdrop-blur-sm"
-          onClick={closeLightbox}
-          role="dialog"
-          aria-modal="true"
+        <dialog
+          open
+          className="fixed inset-0 z-50 w-full h-full max-w-none max-h-none m-0 p-0 border-none bg-transparent"
           aria-label="Image preview"
         >
-          {/* Close button */}
+          {/* Backdrop button for closing */}
           <button
             onClick={closeLightbox}
-            className="absolute top-4 right-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
+            className="absolute inset-0 w-full h-full bg-charcoal/95 backdrop-blur-sm cursor-default"
             aria-label="Close preview"
-          >
-            <svg
-              className="w-8 h-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          />
+
+          {/* Content container */}
+          <div className="relative z-10 flex items-center justify-center w-full h-full pointer-events-none">
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-4 right-4 p-2 text-cream/70 hover:text-cream transition-colors pointer-events-auto"
+              aria-label="Close preview"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-8 h-8"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
 
-          {/* Previous button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToPrevious();
-            }}
-            className="absolute left-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
-            aria-label="Previous image"
-          >
-            <svg
-              className="w-10 h-10"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            {/* Previous button */}
+            <button
+              onClick={goToPrevious}
+              className="absolute left-4 p-2 text-cream/70 hover:text-cream transition-colors pointer-events-auto"
+              aria-label="Previous image"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-10 h-10"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
 
-          {/* Next button */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              goToNext();
-            }}
-            className="absolute right-4 z-10 p-2 text-cream/70 hover:text-cream transition-colors"
-            aria-label="Next image"
-          >
-            <svg
-              className="w-10 h-10"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            {/* Next button */}
+            <button
+              onClick={goToNext}
+              className="absolute right-4 p-2 text-cream/70 hover:text-cream transition-colors pointer-events-auto"
+              aria-label="Next image"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M9 5l7 7-7 7"
+              <svg
+                className="w-10 h-10"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+
+            {/* Image container */}
+            <figure className="relative max-w-[90vw] max-h-[85vh] aspect-auto pointer-events-auto">
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                width={1200}
+                height={1200}
+                className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
+                priority
               />
-            </svg>
-          </button>
 
-          {/* Image container */}
-          <div
-            className="relative max-w-[90vw] max-h-[85vh] aspect-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              width={1200}
-              height={1200}
-              className="max-w-full max-h-[85vh] w-auto h-auto object-contain rounded-lg"
-              priority
-            />
+              {/* Caption */}
+              <figcaption className="absolute -bottom-10 left-0 right-0 text-center font-body text-cream/70 text-sm">
+                {selectedImage.alt}
+              </figcaption>
+            </figure>
 
-            {/* Caption */}
-            <p className="absolute -bottom-10 left-0 right-0 text-center font-body text-cream/70 text-sm">
-              {selectedImage.alt}
-            </p>
+            {/* Image counter */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-body text-cream/50 text-sm">
+              {selectedIndex === null ? 0 : selectedIndex + 1} /{" "}
+              {galleryImages.length}
+            </div>
           </div>
-
-          {/* Image counter */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-body text-cream/50 text-sm">
-            {selectedIndex !== null ? selectedIndex + 1 : 0} /{" "}
-            {galleryImages.length}
-          </div>
-        </div>
+        </dialog>
       )}
     </section>
   );

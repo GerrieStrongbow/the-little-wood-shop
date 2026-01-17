@@ -30,14 +30,14 @@ export default function Header() {
     >
       <nav className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo / Shop Name */}
-        <a
-          href="#"
+        <button
+          onClick={() => globalThis.scrollTo({ top: 0, behavior: "smooth" })}
           className={`font-display text-xl md:text-2xl font-semibold tracking-wide transition-colors duration-300 ${
             scrolled ? "text-charcoal" : "text-cream"
           }`}
         >
           The Little Wood Shop
-        </a>
+        </button>
 
         {/* Navigation Links */}
         <ul className="hidden md:flex items-center gap-8">
