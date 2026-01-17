@@ -65,7 +65,7 @@ export default function Contact() {
                     ? "noopener noreferrer"
                     : undefined
                 }
-                className="group flex items-start gap-5 p-4 -mx-4 rounded-lg transition-all duration-300 hover:bg-cream-dark"
+                className="group flex items-start gap-5 p-4 md:-mx-4 rounded-lg transition-all duration-300 hover:bg-cream-dark"
               >
                 <div className="shrink-0 w-12 h-12 rounded-full bg-wood-light/20 flex items-center justify-center text-wood-dark transition-all duration-300 group-hover:bg-amber/20 group-hover:text-amber-dark">
                   {item.icon}
@@ -94,7 +94,7 @@ export default function Contact() {
 
           {/* Google Maps */}
           <div className="relative">
-            <div className="aspect-square lg:aspect-auto lg:h-full min-h-[400px] rounded-lg overflow-hidden shadow-xl">
+            <div className="w-full h-[280px] md:aspect-square md:h-auto lg:aspect-auto lg:h-full md:min-h-[400px] rounded-lg overflow-hidden shadow-xl">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.108654756852!2d22.803432177364247!3d-34.015421826671094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e78a32df6b01203%3A0x9a8d1aff2ae2e65e!2sThe%20Little%20Wood%20Shop!5e0!3m2!1sen!2sza!4v1768653160499!5m2!1sen!2sza"
                 width="100%"
@@ -108,9 +108,9 @@ export default function Contact() {
               />
             </div>
 
-            {/* Decorative frame */}
-            <div className="absolute -inset-3 border border-wood-light/30 rounded-lg -z-10" />
-            <div className="absolute -inset-6 border border-wood-light/20 rounded-lg -z-20" />
+            {/* Decorative frame - hidden on mobile to prevent overflow */}
+            <div className="hidden md:block absolute -inset-3 border border-wood-light/30 rounded-lg -z-10" />
+            <div className="hidden md:block absolute -inset-6 border border-wood-light/20 rounded-lg -z-20" />
           </div>
         </div>
       </div>
